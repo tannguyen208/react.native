@@ -1,0 +1,33 @@
+{
+  "name": "tanna",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "keyevent": "adb shell input keyevent 82",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "dva-core": "^1.4.0",
+    "lodash": "^4.17.11",
+    "prop-types": "^15.6.2",
+    "react": "16.6.1",
+    "react-native": "0.57.7",
+    "react-navigation": "^3.0.8",
+    "react-navigation-redux-helpers": "^2.0.8",
+    "react-redux": "^6.0.0"
+  },
+  "devDependencies": {
+    "babel-jest": "23.6.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.50.0",
+    "react-test-renderer": "16.6.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
