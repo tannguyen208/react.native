@@ -8,3 +8,4 @@ export { delay } from './delay';
 export { createAction } from './createAction';
 export { default as Storage } from './storage';
 export { default as request } from './request';
+export { default as navigator } from './navigator';

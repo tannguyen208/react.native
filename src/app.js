@@ -5,6 +5,7 @@
  */
 import React from 'react';
 import { name as appName } from '../app.json';
+import { createLogger } from 'redux-logger';
 import { AppRegistry } from 'react-native';
 
 import { dva } from './utils';
@@ -13,13 +14,14 @@ import countModel from './models/count';
 
 const initialState = {};
 const models = [
-  // countModel
+  countModel
 ];
 const extraReducers = {
   router: routerReducer
 };
 const onAction = [
-  routerMiddleware
+  routerMiddleware,
+  createLogger(),
 ];
 const onError = e => console.log('onError', e);
 
