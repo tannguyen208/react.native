@@ -13,7 +13,7 @@ class Home extends React.Component {
   render = () => {
     return (
       <View style={styles.container}>
-        <Button />
+        <Button text={'tanna'}/>
       </View>
     );
   }

@@ -5,8 +5,10 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "clear": "cd android && gradlew clean && cd ..",
     "keyevent": "adb shell input keyevent 82",
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "rm:node_modules": "rm -rf node_modules",
     "test": "jest"
   },
   "dependencies": {
@@ -15,6 +17,7 @@
     "prop-types": "^15.6.2",
     "react": "16.6.1",
     "react-native": "0.57.7",
+    "react-native-gesture-handler": "^1.0.10",
     "react-navigation": "^3.0.8",
     "react-navigation-redux-helpers": "^2.0.8",
     "react-redux": "^6.0.0"

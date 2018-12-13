@@ -13,7 +13,7 @@ import countModel from './models/count';
 
 const initialState = {};
 const models = [
-  countModel
+  // countModel
 ];
 const extraReducers = {
   router: routerReducer
@@ -24,6 +24,6 @@ const onAction = [
 const onError = e => console.log('onError', e);
 
 const app = dva({ initialState, models, extraReducers, onAction, onError });
-const App = app.start(<Router />);
+const Root = app.start(<Router />);
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => Root);
