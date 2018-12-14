@@ -6,6 +6,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  input: {
+    width: 200,
+    margin: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#fafafa',
+  }
 });
 
 export default styles;

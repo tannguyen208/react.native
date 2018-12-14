@@ -18,11 +18,11 @@ export default {
   effects: {
     *decrement(_, { call, put }) {
       yield call(countService.decrement, 0);
-      yield put(createAction('minus'));
+      yield put(createAction('minus')());
     },
     *increment(_, { call, put }) {
       yield call(countService.increment, 0);
-      yield put(createAction('plus'));
+      yield put(createAction('plus')());
     },
   },
 

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
+import { createAction } from '../../utils';
 
 import styles from './styles';
 import { Button } from '../../components';
@@ -9,23 +10,26 @@ import { Button } from '../../components';
 const propTypes = {};
 const defaultProps = {};
 const navigationOptions = {
-  title: 'Home',
+  headerTitle: 'Home',
 };
 
 @connect((state) => ({ count: state.count }))
 class Home extends React.Component {
+
   onDecrement = () => {
     let { dispatch } = this.props;
-    dispatch({ type: 'count/decrement', payload: 2 });
+    dispatch(createAction('count/decrement')(2));
   }
 
   onIncrement = () => {
     let { dispatch } = this.props;
-    dispatch({ type: 'count/increment' });
+    dispatch(createAction('count/increment')());
   }
 
   render = () => {
-    let { count } = this.props;
+    let { count, navigation } = this.props;
+    console.log(this.props);
+    
 
     return (
       <View style={styles.container}>
@@ -34,6 +38,8 @@ class Home extends React.Component {
           <Button style={styles.button} text={'-'} onPress={this.onDecrement} />
           <Button style={styles.button} text={'+'} onPress={this.onIncrement} />
         </View>
+
+        <Button onPress={() => navigation.navigate('Login')} text={'go back'} />
       </View>
     );
   }
