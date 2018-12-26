@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { View, Text } from 'react-native';
 import { createAction } from '../../utils';
 
-import styles from './styles';
 import { Button } from '../../components';
+import { View, Text } from 'react-native';
+import styles from './styles';
 
 const propTypes = {};
 const defaultProps = {};
@@ -28,8 +28,6 @@ class Home extends React.Component {
 
   render = () => {
     let { count, navigation } = this.props;
-    console.log(this.props);
-    
 
     return (
       <View style={styles.container}>

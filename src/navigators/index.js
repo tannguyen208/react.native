@@ -1,44 +1,29 @@
-import { Animated, Easing } from 'react-native';
+import React from 'react';
 import {
   createSwitchNavigator,
   createAppContainer
 } from 'react-navigation';
-import { default as AuthNavigator } from './AuthNavigator';
-import { default as MainNavigator } from './MainNavigator';
+import { navigationService } from '../utils';
+
+import { default as Auth } from './Auth';
+import { default as Main } from './Main';
 
 const routeConfigs = {
-  Auth: AuthNavigator,
-  Main: MainNavigator,
+  Auth: { screen: Auth },
+  Main: { screen: Main },
 };
-
-const switchNavigatorConfig = {
-  initialRouteName: 'Auth',
-  transitionSpec: {
-    duration: 800,
-    timing: Animated.timing,
-    easing: Easing.out(Easing.poly(4)),
-  },
-  screenInterpolator: sceneProps => {
-    const { layout, position, scene } = sceneProps;
-    const { index } = scene;
-    const width = layout.initWidth;
-    const translateX = position.interpolate({
-      inputRange: [index - 1, index, index + 1],
-      outputRange: [width, 0, 0],
-    });
-    if (index <= 1) {
-      return {};
-    }
-
-    return { transform: [{ translateX }] };
-  }
-};
+const switchNavigatorConfig = {};
 
 const AppNavigator = createSwitchNavigator(routeConfigs, switchNavigatorConfig);
+const AppContainer = createAppContainer(AppNavigator);
 
-export {
-  AuthNavigator,
-  MainNavigator,
+export default class extends React.Component {
+  static router = {
+    ...AppContainer.router,
+    getStateForAction: (action, lastState) => {
+      return AppContainer.router.getStateForAction(action, lastState);
+    },
+  };
+
+  render = () => <AppContainer {...this.props} ref={navigationService.setTopLevelNavigator} />;
 };
-
-export default createAppContainer(AppNavigator);

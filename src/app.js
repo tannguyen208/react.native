@@ -10,6 +10,7 @@ import { AppRegistry } from 'react-native';
 
 import { dva } from './utils';
 import Router, { routerMiddleware, routerReducer } from './router';
+
 import countModel from './models/count';
 
 const initialState = {};

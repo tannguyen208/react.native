@@ -8,7 +8,7 @@ import { Button } from '../../components';
 const propTypes = {};
 const defaultProps = {};
 const navigationOptions = {
-  title: 'Login',
+  header: null,
 };
 
 class Login extends React.Component {
