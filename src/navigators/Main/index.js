@@ -1,27 +1,25 @@
 import React from 'react';
 import {
-  View,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import {
+  createStackNavigator,
   createBottomTabNavigator,
 } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import {
-  BookmarkStack,
-  HomeStack,
-  PrivateStack,
-  ProfileStack
-} from './StacksNavigator';
+import { default as Routes } from '../Routes';
 import { App } from '../../components';
+import {
+  Home,
+  Bookmarks,
+  Private,
+  Profile,
+} from '../../containers';
 
 /** **********************************************
  * bottom tab navigators
  */
 const bottonTabRouteConfig = {
-  Home: {
-    screen: HomeStack,
+  [Routes.TabsHome]: {
+    screen: Home,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
         <Icon
@@ -32,9 +30,9 @@ const bottonTabRouteConfig = {
       ),
     },
   },
-  Bookmark: {
-    screen: BookmarkStack,
-    navigationOptions: {
+  [Routes.TabsBookmarks]: {
+    screen: Bookmarks,
+    navigationOptions: () => ({
       tabBarIcon: ({ tintColor }) => (
         <Icon
           name={'bookmark'}
@@ -42,20 +40,37 @@ const bottonTabRouteConfig = {
           size={22}
         />
       ),
-    },
+    }),
   },
   MultiBar: {
     screen: () => null,
-    navigationOptions: {
-      tabBarIcon: <App.MultiBarNavigator />
-    },
+    navigationOptions: () => ({
+      tabBarIcon: (
+        <App.MultiBarNavigator
+          routes={[
+            {
+              routeName: Routes.TabsHome,
+              color: 'red'
+            },
+            {
+              routeName: Routes.TabsBookmarks,
+              color: 'green'
+            },
+            {
+              routeName: Routes.TabsPrivate,
+              color: 'blue'
+            },
+          ]}
+        />
+      )
+    }),
     params: {
-      navigationDisabled: true
+      navigationDisabled: true,
     },
   },
-  Private: {
-    screen: PrivateStack,
-    navigationOptions: {
+  [Routes.TabsPrivate]: {
+    screen: Private,
+    navigationOptions: () => ({
       tabBarIcon: ({ tintColor }) => (
         <Icon
           name={'address-book'}
@@ -63,11 +78,11 @@ const bottonTabRouteConfig = {
           size={22}
         />
       ),
-    },
+    }),
   },
-  Profile: {
-    screen: ProfileStack,
-    navigationOptions: {
+  [Routes.TabsProfile]: {
+    screen: Profile,
+    navigationOptions: () => ({
       tabBarIcon: ({ tintColor }) => (
         <Icon
           name={'user'}
@@ -75,10 +90,11 @@ const bottonTabRouteConfig = {
           size={22}
         />
       ),
-    },
+    }),
   },
 };
 const bottonTabNavigationRouteConfig = {
+  tabBarComponent: App.MagicTabBar,
   tabBarOptions: {
     showLabel: false,
     activeTintColor: '#F8F8F8',
@@ -89,6 +105,7 @@ const bottonTabNavigationRouteConfig = {
     tabStyle: {}
   }
 };
-const MainScreen = createBottomTabNavigator(bottonTabRouteConfig, bottonTabNavigationRouteConfig)
+
+const MainScreen = createBottomTabNavigator(bottonTabRouteConfig, bottonTabNavigationRouteConfig);
 
 export default MainScreen;
