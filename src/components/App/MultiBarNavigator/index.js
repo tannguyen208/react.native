@@ -4,42 +4,36 @@ import {
   View,
   Animated,
   TouchableOpacity,
-  TouchableNativeFeedback,
+  TouchableWithoutFeedback,
 } from 'react-native';
+import { withNavigation } from "react-navigation";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { default as Styles } from './MultiBarNavigator.Stylesheet';
+import Styles from './stylesheet';
 
 const ANIMATION_DURATION = 300;
 
 class MultiBarNavigator extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      measured: false,
-      active: false
-    };
-  }
-
   activation = new Animated.Value(0);
 
-  componentDidMount = () => {
-    this.makeActivations(this.props.routes);
-  }
+  state = {
+    measured: false,
+    active: false
+  };
 
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.routes !== this.props.routes) {
-      this.makeActivations(nextProps.routes);
-    }
-  }
-
-  actionPressed = route => {
+  actionPressed = (route) => {
     this.togglePressed();
 
-    alert(route);
+    // OPTION: Wait to animation complete
+    setTimeout(() => {
+      // NAVIGATE TO SELECTED ROUTE
+      this.props.navigation.navigate({ routeName: route.routeName });
+    }, 500);
   };
 
   togglePressed = () => {
-    const { routes } = this.props;
+    const {
+      routes
+    } = this.props;
 
     if (this.state.active) {
       this.setState({ active: false });
@@ -57,9 +51,11 @@ class MultiBarNavigator extends React.Component {
   };
 
   renderActions = () => {
-    const { routes } = this.props;
+    const {
+      routes
+    } = this.props;
 
-    const ACTION_SIZE = 36;
+    const ACTION_SIZE = 30;
     const EXPANDING_ANGLE = 135;
     const STEP = EXPANDING_ANGLE / routes.length;
 
@@ -103,21 +99,29 @@ class MultiBarNavigator extends React.Component {
               backgroundColor: route.color,
             }]}
             onPress={() => this.actionPressed(route)}
-          >
-            <Icon name={route.iconName} size={18} color={'#ffffff'} />
-          </TouchableOpacity>
+          />
         </Animated.View>
       );
     })
   };
 
   /**
-     * Create animation values for each action.
-     */
-  makeActivations = routes => {
+   * Create animation values for each action.
+   */
+  makeActivations = (routes) => {
     routes.forEach((v, i) => this[`actionActivation_${i}`] = new Animated.Value(0));
     this.setState({ measured: true });
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.routes !== this.props.routes) {
+      this.makeActivations(nextProps.routes);
+    }
+  }
+
+  componentDidMount() {
+    this.makeActivations(this.props.routes);
+  }
 
   render = () => {
     const activationRotate = this.activation.interpolate({
@@ -131,56 +135,42 @@ class MultiBarNavigator extends React.Component {
     });
 
     return (
-      <View pointerEvents={'box-none'} style={Styles.container}>
+      <View
+        pointerEvents="box-none"
+        style={Styles.container}
+      >
         {
           this.state.measured &&
           <View style={Styles.actionsWrapper}>
             {this.renderActions()}
           </View>
         }
-        <TouchableNativeFeedback onPress={this.togglePressed} >
+        <TouchableWithoutFeedback onPress={this.togglePressed} >
           <Animated.View style={[Styles.toggleButton, {
             transform: [
               { rotate: activationRotate },
               { scale: activationScale }
             ]
           }]}>
-            <Icon name={'plus'} style={Styles.toggleIcon} />
+            <Icon name="plus" style={Styles.toggleIcon} />
           </Animated.View>
-        </TouchableNativeFeedback>
+        </TouchableWithoutFeedback>
       </View>
-    )
+    );
   }
 }
 
 MultiBarNavigator.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.shape({
-    key: PropTypes.string,
-    color: PropTypes.string,
-    iconName: PropTypes.string,
+    routeName: PropTypes.string,
+    color: PropTypes.string
   }))
 };
 
 MultiBarNavigator.defaultProps = {
-  routes: [
-    {
-      key: 'youtube',
-      color: '#f00',
-      iconName: 'youtube',
-    },
-    {
-      key: 'facebook',
-      color: '#4267b2',
-      iconName: 'facebook-f',
-    },
-    {
-      key: 'instagram',
-      color: '#f1a457',
-      iconName: 'instagram',
-    },
-  ],
+  routes: [...new Array(5)].map((v, i) => ({
+    color: 'blue'
+  }))
 };
 
-MultiBarNavigator.navigationOptions = {};
-
-export default MultiBarNavigator;
+export default withNavigation(MultiBarNavigator);

@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  createStackNavigator,
   createBottomTabNavigator,
 } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -12,12 +11,13 @@ import {
   Bookmarks,
   Private,
   Profile,
-} from '../../containers';
+} from '../Screens/Stacks';
 
 /** **********************************************
  * bottom tab navigators
  */
 const bottonTabRouteConfig = {
+
   [Routes.TabsHome]: {
     screen: Home,
     navigationOptions: {
@@ -30,6 +30,7 @@ const bottonTabRouteConfig = {
       ),
     },
   },
+
   [Routes.TabsBookmarks]: {
     screen: Bookmarks,
     navigationOptions: () => ({
@@ -42,6 +43,7 @@ const bottonTabRouteConfig = {
       ),
     }),
   },
+
   MultiBar: {
     screen: () => null,
     navigationOptions: () => ({
@@ -68,6 +70,7 @@ const bottonTabRouteConfig = {
       navigationDisabled: true,
     },
   },
+
   [Routes.TabsPrivate]: {
     screen: Private,
     navigationOptions: () => ({
@@ -80,6 +83,7 @@ const bottonTabRouteConfig = {
       ),
     }),
   },
+
   [Routes.TabsProfile]: {
     screen: Profile,
     navigationOptions: () => ({
@@ -92,7 +96,9 @@ const bottonTabRouteConfig = {
       ),
     }),
   },
+
 };
+
 const bottonTabNavigationRouteConfig = {
   tabBarComponent: App.MagicTabBar,
   tabBarOptions: {
@@ -102,7 +108,6 @@ const bottonTabNavigationRouteConfig = {
     style: {
       backgroundColor: '#171F33'
     },
-    tabStyle: {}
   }
 };
 

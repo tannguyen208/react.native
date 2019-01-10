@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, TextInput } from 'react-native';
 
-import styles from './styles';
-import { Button } from '../../components';
+import Styles from './styles';
+import Routes from '../../navigators/Routes';
+import {
+  Button,
+} from '../../components';
 
 const propTypes = {};
 const defaultProps = {};
@@ -25,7 +28,7 @@ class Login extends React.Component {
 
     if (username === 'tanna' && password === '123') {
       const { navigate } = this.props.navigation
-      navigate('Home');
+      navigate(Routes.TabsHome);
     }
   }
 
@@ -39,17 +42,17 @@ class Login extends React.Component {
     let { username, password } = this.state;
 
     return (
-      <View style={styles.container}>
+      <View style={Styles.container}>
         <TextInput
           value={username}
-          style={styles.input}
+          style={Styles.input}
           placeholder={'username ...'}
           onChangeText={(text) => this.onChangeText('username', text)}
         />
         <TextInput
           secureTextEntry
           value={password}
-          style={styles.input}
+          style={Styles.input}
           placeholder={'password ...'}
           onChangeText={(text) => this.onChangeText('password', text)}
         />

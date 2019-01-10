@@ -1,6 +1,9 @@
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+} from 'react-native';
+import { colors } from '../../../configs';
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
@@ -14,27 +17,23 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 50,
-    backgroundColor: '#566280'
+    backgroundColor: '#586589',
   },
   toggleIcon: {
     fontSize: 30,
-    color: '#ffffff'
+    color: '#ffffff',
   },
   actionsWrapper: {
     position: 'absolute',
     bottom: 0
   },
   actionContainer: {
-    position: 'absolute',
+    position: 'absolute'
   },
   actionContent: {
     flex: 1,
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: 30,
+    height: 30,
+    borderRadius: 15
   }
 });
-
-export default styles;

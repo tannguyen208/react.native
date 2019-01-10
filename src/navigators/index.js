@@ -9,8 +9,8 @@ import { default as Auth } from './Auth';
 import { default as Main } from './Main';
 
 const routeConfigs = {
-  Auth: { screen: Auth },
   Main: { screen: Main },
+  Auth: { screen: Auth },
 };
 const switchNavigatorConfig = {};
 
