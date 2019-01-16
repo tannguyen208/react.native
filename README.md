@@ -38,7 +38,8 @@ react-native upgrade
 ```base
 react-native link
 ```
-07. complete. 🤣
+07. Use [code push](https://github.com/Microsoft/react-native-code-push)
+08. complete. 🤣
 ### 🤔 Developer
 With android
 ```base
